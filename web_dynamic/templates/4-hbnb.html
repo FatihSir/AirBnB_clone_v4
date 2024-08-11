@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/6-filters.css">
+    <link type="text/css" rel="stylesheet" href="../static/styles/8-places.css">
+
+    <!-- Favicon for the webpage -->
+    <link rel="icon" href="../static/images/icon.png" />
+    
+    <!-- Title of the webpage -->
+    <title>HBnB</title>
+    
+    <!-- jQuery library for handling DOM manipulation and AJAX requests -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
+    <!-- Link to the custom JavaScript file for handling the dynamic behavior on this page -->
+	<script src="static/scripts/4-hbnb.js"></script>
+  </head>
+  <body>
+    <!-- Header section containing the logo and API status indicator -->
+    <header>
+      <div class="logo"></div>
+	  <div id="api_status" class="available">
+	    <!-- This div will visually indicate the status of the API (connected or not) -->
+	  </div>
+    </header>
+    
+    <!-- Main container for the content of the page -->
+    <div class="container">
+      <!-- Filters section for selecting locations and amenities -->
+      <section class="filters">
+	    <div class="locations">
+	      <h3>States</h3>
+	      <h4>&nbsp;</h4> <!-- Placeholder element for spacing or future content -->
+	      <div class="popover">
+	        <ul>
+	          <!-- Loop through the states and display each state with its cities -->
+	          {% for state in states %}
+	          <li>
+		        <h2>{{ state[0].name }}:</h2>
+		        <ul>
+		          {% for city in state[1] %}
+		          <li>{{ city.name }}</li>
+		          {% endfor %}
+		        </ul>
+	          </li>
+	          {% endfor %}
+	        </ul>
+	      </div>
+	    </div>
+
+	    <!-- Amenities filter with checkboxes for each amenity -->
+	    <div class="amenities">
+	      <h3>Amenities</h3>
+	      <h4>&nbsp;</h4> <!-- Placeholder element for spacing or future content -->
+	      <div class="popover">
+	        <ul>
+	          <!-- Loop through the amenities and create a checkbox for each -->
+	          {% for amenity in amenities %}
+	          <li><input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}" > {{ amenity.name }}</li>
+	          {% endfor %}
+	        </ul>
+	      </div>
+	    </div>
+
+	    <!-- Search button for filtering places based on selected criteria -->
+	    <button type="button">Search</button>
+      </section>
+
+      <!-- Section displaying the title for the list of places -->
+      <div class="placesh1"><h1>Places</h1></div>
+
+      <!-- Section where the places will be dynamically loaded and displayed -->
+      <section class="places">
+	    <!-- Placeholder for dynamic content, such as list of places -->
+      </section>
+    </div>
+
+    <!-- Footer section containing the website's copyright or brand information -->
+    <footer>
+      <p>Holberton School</p>
+    </footer>
+  </body>
+</html>
