@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags for character encoding and compatibility -->
+    <meta charset="UTF-8">
+
+    <!-- Linking CSS stylesheets for common, header, footer, filters, and places -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/6-filters.css">
+    <link type="text/css" rel="stylesheet" href="../static/styles/8-places.css">
+
+    <!-- Favicon for the website -->
+    <link rel="icon" href="../static/images/icon.png" />
+
+    <!-- Title of the webpage -->
+    <title>HBnB</title>
+
+    <!-- jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Custom JavaScript file for the page -->
+	<script src="static/scripts/2-hbnb.js"></script>
+  </head>
+  <body>
+    <!-- Header section containing the logo -->
+    <header>
+      <div class="logo"></div>
+    </header>
+
+    <!-- Main container for the content -->
+    <div class="container">
+      <!-- Filters section for States and Amenities -->
+      <section class="filters">
+	    <!-- Locations filter with states and cities -->
+	    <div class="locations">
+	      <h3>States</h3>
+	      <h4>&nbsp;</h4>
+	      <div class="popover">
+	        <ul>
+	          <!-- Loop through states and display each state with its cities -->
+	          {% for state in states %}
+	          <li>
+		        <h2>{{ state[0].name }}:</h2>
+		        <ul>
+		          {% for city in state[1] %}
+		          <li>{{ city.name }}</li>
+		          {% endfor %}
+		        </ul>
+	          </li>
+	          {% endfor %}
+	        </ul>
+	      </div>
+	    </div>
+
+	    <!-- Amenities filter with checkboxes for each amenity -->
+	    <div class="amenities">
+	      <h3>Amenities</h3>
+	      <h4>&nbsp;</h4>
+	      <div class="popover">
+	        <ul>
+	          <!-- Loop through amenities and create a checkbox for each -->
+	          {% for amenity in amenities %}
+	          <li><input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}" > {{ amenity.name }}</li>
+	          {% endfor %}
+	        </ul>
+	      </div>
+	    </div>
+
+	    <!-- Search button -->
+	    <button type="button">Search</button>
+      </section>
+
+      <!-- Places section with a title -->
+      <div class="placesh1"><h1>Places</h1></div>
+      <section class="places">
+	    <!-- Loop through places and display each place's details -->
+	    {% for place in places %}
+	    <article>
+	      <div class="title_box">
+	        <h2>{{ place.name }}</h2>
+	        <div class="price_by_night">${{ place.price_by_night }}</div>
+	      </div>
+	      <div class="information">
+	        <div class="max_guest">{{ place.max_guest }} Guest{% if place.max_guest != 1 %}s{% endif %}</div>
+            <div class="number_rooms">{{ place.number_rooms }} Bedroom{% if place.number_rooms != 1 %}s{% endif %}</div>
+            <div class="number_bathrooms">{{ place.number_bathrooms }} Bathroom{% if place.number_bathrooms != 1 %}s{% endif %}</div>
+	      </div>
+	      <div class="user">
+            <b>Owner:</b> {{ place.user.first_name }} {{ place.user.last_name }}
+          </div>
+          <div class="description">
+	        {{ place.description | safe }}
+          </div>
+	    </article>
+	    {% endfor %}
+      </section>
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+      <p>Holberton School</p>
+    </footer>
+  </body>
+</html>
